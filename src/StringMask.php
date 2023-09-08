@@ -10,7 +10,6 @@ class StringMask
     private int $startIndex = 0;
     private int $length = 0;
     private Until $until;
-    private array $ignore;
     private string $via = '*';
 
     public function __construct(private string $string)
@@ -41,12 +40,6 @@ class StringMask
         return $this;
     }
 
-    public function ignore(string|array $ignore): self
-    {
-        $this->ignore = is_array($ignore) ? $ignore : [$ignore];
-        return $this;
-    }
-
     public function start(int $startIndex): self
     {
         $this->startIndex = $startIndex;
@@ -74,10 +67,6 @@ class StringMask
         );
         $this->manipulated = implode($this->wordSeparator, $manipulatedStrings);
         return $this->manipulated;
-    }
-
-    private function applyIgnore()
-    {
     }
 
     private function getLength(string $string): int
