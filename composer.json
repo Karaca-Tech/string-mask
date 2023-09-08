@@ -1,0 +1,26 @@
+{
+    "name": "karaca-tech/string-mask",
+    "require": {
+        "php": "^8.2",
+        "ext-mbstring": "*"
+    },
+    "require-dev": {
+        "pestphp/pest": "^2.18"
+    },
+    "autoload": {
+        "psr-4": {
+            "KaracaTech\\StringMask\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Mücahit Cücen",
+            "email": "mucahitcucen@gmail.com"
+        }
+    ],
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    }
+}
