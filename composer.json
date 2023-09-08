@@ -5,7 +5,11 @@
         "ext-mbstring": "*"
     },
     "require-dev": {
-        "pestphp/pest": "^2.18"
+        "pestphp/pest": "^2.18",
+        "phpstan/extension-installer": "^1.1",
+        "phpstan/phpstan-deprecation-rules": "^1.0",
+        "phpstan/phpstan-phpunit": "^1.0",
+        "phpstan/phpstan": "^1.10"
     },
     "autoload": {
         "psr-4": {
@@ -20,7 +24,12 @@
     ],
     "config": {
         "allow-plugins": {
-            "pestphp/pest-plugin": true
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true
         }
+    },
+    "scripts": {
+        "test": "./vendor/bin/pest",
+        "static-analysis": "./vendor/bin/phpstan analyse"
     }
 }
