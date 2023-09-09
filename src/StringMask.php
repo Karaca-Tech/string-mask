@@ -12,9 +12,16 @@ class StringMask
     private Until $until;
     private string $via = '*';
 
-    public function __construct(private string $string)
+    public function __construct(private string $string = '')
     {
-        $this->manipulated = $this->string;
+        $this->text($string);
+    }
+
+    public function text(string $string): self
+    {
+        $this->string = $this->manipulated = $string;
+
+        return $this;
     }
 
     public function __toString()
