@@ -1,7 +1,7 @@
 {
     "name": "karaca-tech/string-mask",
     "require": {
-        "php": "^8.1",
+        "php": "^8.2",
         "ext-mbstring": "*",
         "spatie/laravel-package-tools": "^1.15"
     },
