@@ -1,11 +1,13 @@
 {
     "name": "karaca-tech/string-mask",
     "require": {
-        "php": "^8.2",
-        "ext-mbstring": "*"
+        "php": "^8.1",
+        "ext-mbstring": "*",
+        "spatie/laravel-package-tools": "^1.15"
     },
     "require-dev": {
         "pestphp/pest": "^2.18",
+        "orchestra/testbench": "^8.5",
         "phpstan/extension-installer": "^1.1",
         "phpstan/phpstan-deprecation-rules": "^1.0",
         "phpstan/phpstan-phpunit": "^1.0",
@@ -13,23 +15,39 @@
     },
     "autoload": {
         "psr-4": {
-            "KaracaTech\\StringMask\\": "src/"
-        }
+            "KaracaTech\\StringMask\\": "src/",
+            "Tests\\": "tests/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
     },
     "authors": [
         {
             "name": "Mücahit Cücen",
             "email": "mucahitcucen@gmail.com"
+        },
+        {
+            "name": "Utku Korkmaz",
+            "email": "uutkukorkmaz@gmail.com"
         }
     ],
+    "scripts": {
+        "reset": "rm -rf vendor composer.lock && composer install",
+        "test": "./vendor/bin/pest",
+        "static-analysis": "./vendor/bin/phpstan analyse"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "KaracaTech\\StringMask\\StringMaskServiceProvider"
+            ]
+        }
+    },
     "config": {
         "allow-plugins": {
             "pestphp/pest-plugin": true,
             "phpstan/extension-installer": true
         }
-    },
-    "scripts": {
-        "test": "./vendor/bin/pest",
-        "static-analysis": "./vendor/bin/phpstan analyse"
     }
 }
