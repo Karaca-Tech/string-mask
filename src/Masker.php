@@ -200,7 +200,7 @@ class Masker implements MasksStrings
         return $this->keepNthWord(1);
     }
 
-    public function keepFirstAndLast(int $characterCount = 1): self
+    public function keepFirstAndLastCharacter(int $characterCount = 1): self
     {
         return $this->keepFirstCharacter($characterCount)->keepLastCharacter($characterCount);
     }

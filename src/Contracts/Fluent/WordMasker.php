@@ -15,7 +15,7 @@ interface WordMasker
 
     public function keepLastCharacter(int $characterCount): WordMasker;
 
-    public function keepFirstAndLast(int $characterCount): WordMasker;
+    public function keepFirstAndLastCharacter(int $characterCount): WordMasker;
 
 
 
