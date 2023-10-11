@@ -127,7 +127,7 @@ class Masker implements MasksStrings
 
     public function email(string $string): string
     {
-        return $this->of($string)->divide('@')->keepFirstAndLast()->keepLastWord()->apply();
+        return $this->of($string)->divide('@')->keepFirstAndLastCharacter()->keepLastWord()->apply();
     }
 
     /**
