@@ -105,10 +105,10 @@ class Masker implements MasksStrings
     protected function getApplicableProcessors(): array
     {
         return $this->processors
-            ->reject(fn($availability) => is_bool($availability) && !$availability)
+            ->reject(fn ($availability) => is_bool($availability) && !$availability)
             ->keys()
-            ->map(fn($processor) => new $processor(...$this->processors->get($processor)))
-            ->filter(fn($processor) => $processor instanceof Processor)
+            ->map(fn ($processor) => new $processor(...$this->processors->get($processor)))
+            ->filter(fn ($processor) => $processor instanceof Processor)
             ->toArray();
     }
 

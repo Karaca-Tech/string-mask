@@ -8,7 +8,6 @@ use KaracaTech\StringMask\Powder\Processor;
 
 class KeepFirst extends Processor
 {
-
     public function __construct(protected int $characterCount)
     {
     }

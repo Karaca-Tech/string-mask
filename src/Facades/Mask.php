@@ -17,7 +17,6 @@ use KaracaTech\StringMask\Masker;
  */
 class Mask extends Facade
 {
-
     protected static function getFacadeAccessor()
     {
         return Masker::class;
