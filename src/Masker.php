@@ -11,8 +11,6 @@ use KaracaTech\StringMask\Concerete\Processors\FullMask;
 use KaracaTech\StringMask\Concerete\Processors\KeepFirst;
 use KaracaTech\StringMask\Concerete\Processors\KeepLast;
 use KaracaTech\StringMask\Concerete\Processors\Prepend;
-use KaracaTech\StringMask\Contracts\Fluent\Maskable;
-use KaracaTech\StringMask\Contracts\Fluent\WordMasker;
 use KaracaTech\StringMask\Contracts\Masker as MasksStrings;
 use KaracaTech\StringMask\Powder\Processor;
 
