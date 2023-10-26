@@ -11,10 +11,10 @@ abstract class Processor
 
     public function handle(MaskTarget $passable, Closure $next)
     {
-        if($passable->shouldSkip()){
+        if($passable->shouldSkip()) {
             $passable->skipped($this);
             return $passable;
         }
-        return $next($passable->update($this->execute($passable),get_class($this)));
+        return $next($passable->update($this->execute($passable), get_class($this)));
     }
 }
