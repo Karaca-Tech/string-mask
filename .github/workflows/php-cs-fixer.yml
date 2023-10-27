@@ -1,35 +1,27 @@
-name: PHP-CS-Fixer
+name: Fix PHP code style issues
 
 on:
   push:
-    branches:
-      - main
+    paths:
+      - '**.php'
+
+permissions:
+  contents: write
 
 jobs:
-  php-cs-fixer:
+  php-code-styling:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check Out Repository
-        uses: actions/checkout@v2
-
-      - name: Set up PHP
-        uses: shivammathur/setup-php@v2
+      - name: Checkout code
+        uses: actions/checkout@v3
         with:
-          php-version: '8.2'
+          ref: ${{ github.head_ref }}
 
-      - name: Install Composer Dependencies
-        run: composer install
+      - name: Fix PHP code style issues
+        uses: aglipanci/laravel-pint-action@2.3.0
 
-      - name: Run PHP-CS-Fixer
-        run: |
-          composer require --dev friendsofphp/php-cs-fixer
-          vendor/bin/php-cs-fixer fix src --dry-run --diff
-
-      - name: Commit and Push Changes
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add .
-          git diff --quiet || git commit -m "Apply PHP-CS-Fixer fixes"
-          git push
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Fix styling
