@@ -11,5 +11,4 @@ class StringMaskServiceProvider extends PackageServiceProvider
     {
         $package->name('string-mask');
     }
-
 }

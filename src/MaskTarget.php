@@ -12,7 +12,6 @@ class MaskTarget
 
     public array $utils = ['applied' => [], 'skipped' => []];
 
-
     public function __construct(protected string $target, protected string $hideCharacter = '*', protected string $encoding = 'UTF-8')
     {
         $this->original = $target;
@@ -22,11 +21,13 @@ class MaskTarget
     {
         if ($this->shouldSkip()) {
             $this->utils['skipped'][$util] = $string;
+
             return $this;
         }
 
         $this->utils['applied'][$util] = $string;
         $this->target = $string;
+
         return $this;
     }
 
@@ -38,6 +39,7 @@ class MaskTarget
     public function setHideCharacter(string $hideCharacter): self
     {
         $this->hideCharacter = $hideCharacter;
+
         return $this;
     }
 
@@ -49,6 +51,7 @@ class MaskTarget
     public function skip()
     {
         $this->skip = true;
+
         return $this;
     }
 

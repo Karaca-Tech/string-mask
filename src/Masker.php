@@ -18,21 +18,18 @@ class Masker implements MasksStrings
 {
     /**
      * The target string to be masked
-     *
-     * @var string|array $target
      */
     protected string|array $target;
 
     /**
      * Processors to be applied to the target string
-     * @var Collection $processors
      */
     protected Collection $processors;
+
     protected string $hideCharacter = '*';
-    /**
-     * @var array
-     */
+
     protected array $willSkipProcess = [];
+
     private string $wordSeparator = ' ';
 
     public function __construct()
@@ -43,67 +40,77 @@ class Masker implements MasksStrings
     public function then(callable $callback): self
     {
         $masked = $this->apply();
+
         return $callback($this->of($masked));
     }
 
     public function of(string $target): self
     {
         $this->target = $target;
+
         return $this;
     }
 
     public function using(string $processor, mixed ...$value): self
     {
         $this->processors->put($processor, $value);
+
         return $this;
     }
 
     public function except($processor): self
     {
         $this->processors->put($processor, false);
+
         return $this;
     }
 
     public function hide(): self
     {
         $this->using(FullMask::class);
+
         return $this;
     }
 
     public function append(string $append): self
     {
         $this->using(Append::class, $append);
+
         return $this;
     }
 
     public function prepend(string $prepend): self
     {
         $this->using(Prepend::class, $prepend);
+
         return $this;
     }
 
     public function keepFirstCharacter(int $characterCount = 1): self
     {
         $this->using(KeepFirst::class, $characterCount);
+
         return $this;
     }
 
     public function keepLastCharacter(int $characterCount = 1): self
     {
         $this->using(KeepLast::class, $characterCount);
+
         return $this;
     }
 
     public function clear(array|string $chars): self
     {
         $this->using(Clear::class, $chars);
+
         return $this;
     }
 
     protected function getApplicableProcessors(): array
     {
         return $this->processors
-            ->reject(fn ($availability) => is_bool($availability) && !$availability)
+            ->reject(fn ($availability) => is_bool($availability) && ! $availability)
             ->keys()
             ->map(fn ($processor) => new $processor(...$this->processors->get($processor)))
             ->filter(fn ($processor) => $processor instanceof Processor)
@@ -114,12 +121,14 @@ class Masker implements MasksStrings
     {
         $this->wordSeparator = $separator;
         $this->target = explode($this->wordSeparator, $this->target);
+
         return $this;
     }
 
     public function eachWord($separator = ' '): self
     {
         $this->divide($separator);
+
         return $this;
     }
 
@@ -173,12 +182,14 @@ class Masker implements MasksStrings
     public function silent(): self
     {
         $this->hiderCharacter('');
+
         return $this;
     }
 
     public function hiderCharacter(string $character): self
     {
         $this->hideCharacter = $character;
+
         return $this;
     }
 
@@ -190,6 +201,7 @@ class Masker implements MasksStrings
     public function keepNthWord(int $n): self
     {
         $this->willSkipProcess[$n - 1] = true;
+
         return $this;
     }
 
@@ -211,21 +223,19 @@ class Masker implements MasksStrings
             ->thenReturn();
     }
 
-    /**
-     * @param  array  $manipulated
-     * @return string
-     */
     private function processMultipleWords(array $manipulated): string
     {
         foreach ($this->target as $index => $word) {
             if (isset($this->willSkipProcess[$index])) {
                 $manipulated[] = $word;
+
                 continue;
             }
             $manipulated[] = $this->process($word);
         }
-        $manipulated = join($this->wordSeparator, $manipulated);
+        $manipulated = implode($this->wordSeparator, $manipulated);
         $this->reset();
+
         return $manipulated;
     }
 
@@ -244,6 +254,7 @@ class Masker implements MasksStrings
             if ($this->processors->isEmpty()) {
                 $this->using(FullMask::class);
             }
+
             return $this->processMultipleWords($manipulated);
         }
 

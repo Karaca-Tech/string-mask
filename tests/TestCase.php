@@ -1,6 +1,7 @@
 <?php
 
 namespace Tests;
+
 use KaracaTech\StringMask\StringMaskServiceProvider;
 
 class TestCase extends \Orchestra\Testbench\TestCase
@@ -13,8 +14,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
     protected function getPackageProviders($app)
     {
         return [
-            StringMaskServiceProvider::class
+            StringMaskServiceProvider::class,
         ];
     }
-
 }

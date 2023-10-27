@@ -37,7 +37,7 @@ interface Masker extends \Stringable
     public function eachWord(string $separator = ' '): Masker;
 
     /**
-     * @param array<int,string>|string $chars
+     * @param  array<int,string>|string  $chars
      */
     public function clear(array|string $chars): Masker;
 
@@ -52,6 +52,4 @@ interface Masker extends \Stringable
     public function creditCard(string $creditCard): string;
 
     public function initials(string $fullname): string;
-
-
 }
