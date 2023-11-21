@@ -20,12 +20,12 @@ class MaskTarget
     public function update(string $string, $util)
     {
         if ($this->shouldSkip()) {
-            $this->utils['skipped'][$util] = $string;
+            $this->utils['skipped'][$this->util($util)] = $string;
 
             return $this;
         }
 
-        $this->utils['applied'][$util] = $string;
+        $this->utils['applied'][$this->util($util)] = $string;
         $this->target = $string;
 
         return $this;
@@ -67,22 +67,27 @@ class MaskTarget
 
     public function skipped(Processor|string $util)
     {
-        $this->utils['skipped'][is_string($util) ? $util : get_class($util)] = $this->target;
+        $this->utils['skipped'][$this->util($util)] = $this->target;
     }
 
     public function applied(Processor|string $util)
     {
-        $this->utils['applied'][is_string($util) ? $util : get_class($util)] = $this->target;
+        $this->utils['applied'][$this->util($util)] = $this->target;
     }
 
     public function isApplied(Processor|string $util): bool
     {
-        return isset($this->utils['applied'][is_string($util) ? $util : get_class($util)]);
+        return isset($this->utils['applied'][$this->util($util)]);
     }
 
     public function isSkipped(Processor|string $util): bool
     {
-        return isset($this->utils['skipped'][is_string($util) ? $util : get_class($util)]);
+        return isset($this->utils['skipped'][$this->util($util)]);
+    }
+
+    protected function util(Processor|string $util): string
+    {
+        return is_string($util) ? $util : get_class($util);
     }
 
     public function getOriginal(): string
