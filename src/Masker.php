@@ -273,7 +273,7 @@ class Masker implements MasksStrings
 
     private function formatUsing(string $class, mixed ...$value): self
     {
-        return $this->using($class,...$value)
-            ->then(fn(Masker $masker) => $masker);
+        return $this->using($class, ...$value)
+            ->then(fn (Masker $masker) => $masker);
     }
 }

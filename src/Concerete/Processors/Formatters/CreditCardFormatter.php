@@ -8,7 +8,6 @@ use KaracaTech\StringMask\Powder\Processor;
 
 class CreditCardFormatter extends Processor
 {
-
     public function execute(MaskTarget $target): string
     {
         //todo: consider different credit card patterns

@@ -18,10 +18,10 @@ it('can mask formatted credit cards', function () {
 });
 
 it('can mask unformatted credit cards', function () {
-   $mask = Mask::creditCard('1111222233334444');
+    $mask = Mask::creditCard('1111222233334444');
 
-   expect($mask)->toBeString()
-       ->toBe('1111 **** **** 4444');
+    expect($mask)->toBeString()
+        ->toBe('1111 **** **** 4444');
 });
 
 it('can mask initials', function () {
