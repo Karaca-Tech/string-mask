@@ -12,9 +12,16 @@ it('can mask emails', function () {
     expect($mask)->toEqual('j****************************s@example.com');
 });
 
-it('can mask credit cards', function () {
+it('can mask formatted credit cards', function () {
     $mask = Mask::creditCard('1111 2222 3333 4444');
     expect($mask)->toEqual('1111 **** **** 4444');
+});
+
+it('can mask unformatted credit cards', function () {
+   $mask = Mask::creditCard('1111222233334444');
+
+   expect($mask)->toBeString()
+       ->toBe('1111 **** **** 4444');
 });
 
 it('can mask initials', function () {

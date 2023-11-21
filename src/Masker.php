@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Pipeline;
 use Illuminate\Support\Str;
 use KaracaTech\StringMask\Concerete\Processors\Append;
 use KaracaTech\StringMask\Concerete\Processors\Clear;
+use KaracaTech\StringMask\Concerete\Processors\Formatters\CreditCardFormatter;
 use KaracaTech\StringMask\Concerete\Processors\FullMask;
 use KaracaTech\StringMask\Concerete\Processors\KeepFirst;
 use KaracaTech\StringMask\Concerete\Processors\KeepLast;
@@ -159,6 +160,7 @@ class Masker implements MasksStrings
     public function creditCard(string $creditCard): string
     {
         return $this->of($creditCard)
+            ->formatUsing(CreditCardFormatter::class)
             ->eachWord()
             ->keepFirstWord()
             ->keepLastWord()
@@ -267,5 +269,11 @@ class Masker implements MasksStrings
     public function __toString(): string
     {
         return $this->apply();
+    }
+
+    private function formatUsing(string $class, mixed ...$value): self
+    {
+        return $this->using($class,...$value)
+            ->then(fn(Masker $masker) => $masker);
     }
 }
