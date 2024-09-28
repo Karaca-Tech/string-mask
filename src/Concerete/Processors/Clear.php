@@ -8,9 +8,7 @@ use KaracaTech\StringMask\Powder\Processor;
 
 class Clear extends Processor
 {
-    public function __construct(protected array|string $characters)
-    {
-    }
+    public function __construct(protected array|string $characters) {}
 
     public function execute(MaskTarget $target): string
     {

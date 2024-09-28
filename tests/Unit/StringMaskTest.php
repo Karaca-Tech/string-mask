@@ -43,20 +43,20 @@ it('can mask fullname', function () {
 it('can mask a string', function () {
     $mask = Mask::of('ABCÇDEFGĞHIİJKLMNOÖPQRSŞTUÜVWXYZ');
 
-    expect((string)$mask->hide())->toBeString()
+    expect((string) $mask->hide())->toBeString()
         ->toBe('********************************');
 });
 
 it('can mask each word a string', function () {
     $mask = Mask::of('abcç defg ğhıi jklm noöp rsşt uüvy z');
 
-    expect((string)$mask->eachWord())->toBeString()
+    expect((string) $mask->eachWord())->toBeString()
         ->toBe('**** **** **** **** **** **** **** *');
 });
 
 it('can clear letter(s) in a string', function () {
     $mask = Mask::of('Hello world!');
 
-    expect((string)$mask->clear(['o', 'l']))->toBeString()
+    expect((string) $mask->clear(['o', 'l']))->toBeString()
         ->toBe('He wrd!');
 });

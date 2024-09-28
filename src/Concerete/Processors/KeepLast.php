@@ -8,9 +8,7 @@ use KaracaTech\StringMask\Powder\Processor;
 
 class KeepLast extends Processor
 {
-    public function __construct(protected int $characterCount)
-    {
-    }
+    public function __construct(protected int $characterCount) {}
 
     public function execute(MaskTarget $target): string
     {
