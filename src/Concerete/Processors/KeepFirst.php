@@ -15,8 +15,8 @@ class KeepFirst extends Processor
     public function execute(MaskTarget $target): string
     {
         $kept = $target->isApplied(KeepLast::class) ? Str::afterLast($target, $target->getHideCharacter()) : '';
-        $keptLength = strlen($kept);
-        $repeat = strlen((string) $target) - $keptLength - $this->characterCount;
+        $keptLength = mb_strlen($kept);
+        $repeat = mb_strlen((string) $target) - $keptLength - $this->characterCount;
         if ($repeat < 0) {
             return $target;
         }
